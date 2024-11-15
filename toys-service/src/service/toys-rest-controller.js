@@ -1,5 +1,4 @@
 const express = require('express');
-const ToysDao = require('../dao/toys-dao');
 const ToysService = require('../business-service/toys-service');
 
 class ToysRestController {
