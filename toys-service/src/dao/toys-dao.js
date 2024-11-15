@@ -12,14 +12,13 @@ class ToysDao {
             });
 
             console.log('Connection established');
-            const result = await connection.execute('SELECT * FROM Toys');
+            const result = await connection.execute('SELECT name, brand, age_group, price FROM Toys');
             console.log('Query executed, result:', result);
             return result.rows.map(row => ({
-                id: row[0],
-                name: row[1],
-                brand: row[2],
-                age_group: row[3],
-                price: row[4]
+                name: row[0],
+                brand: row[1],
+                age_group: row[2],
+                price: row[3]
             }));
         } catch (err) {
             console.error(err);

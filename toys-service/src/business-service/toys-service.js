@@ -1,13 +1,12 @@
 const ToysDao = require('../dao/toys-dao');
 
-
 class ToysService {
     async getAllToys(location) {
         const toysDao = new ToysDao();
         const toys = await toysDao.fetchToysFromDB();
         console.log('Fetched toys:', toys);
         if (!location) {
-            return toys;
+            return toys.map(({ id, currency, ...toy }) => toy);
         }
 
         const taxRates = {
@@ -29,16 +28,19 @@ class ToysService {
         }
 
         return toys.map(toy => {
-            const priceWithTax = toy.price * (1 + taxRate);
-            return { ...toy, price: priceWithTax.toFixed(2), currency };
+            const priceWithTax = (toy.price * (1 + taxRate)).toFixed(2);
+            console.log("Price after tax", priceWithTax);
+            const { id, currency, ...rest } = toy;
+            return { ...rest, price: priceWithTax };
         });
+    }
+
+    getTeam() {
+        return {
+            team: "toymasters",
+            membersNames: ["Cían", "Irene"]
+        };
+    }
 }
 
-getTeam() {
-    return {
-        team: "toymasters",
-        membersNames: ["Cían", "Irene"]
-    };
-}
-}
 module.exports = ToysService;

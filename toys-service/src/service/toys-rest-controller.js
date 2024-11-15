@@ -27,6 +27,7 @@ ping(req, res) {
 async getAllToys(req, res) {
     const location = req.params.location;
     try {
+        console.log("JSON PAYLOAD:", await this.ToysService.getAllToys(location));
         const toys = await this.ToysService.getAllToys(location);
         res.json(toys);
     } catch (err) {
