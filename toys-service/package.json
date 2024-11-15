@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/service/toys-rest-controller.js",
-    "test": "jasmine"
+    "start": "node index.js",
+    "test": "jasmine --verbose"
   },
   "keywords": [],
   "author": "",

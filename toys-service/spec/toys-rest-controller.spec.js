@@ -1,10 +1,8 @@
 console.error = arg => {};
 
-const ToysRestController = require('../controllers/toys-controller');
-const ToysService = require('../business-service/toys-service');
-
-
-
+const express = require('express');
+const ToysRestController = require('../src/service/toys-rest-controller');
+//const ToysService = require('../business-service/toys-service');
 
 describe('Sample Test', () => {
     it('should pass', () => {
@@ -12,16 +10,16 @@ describe('Sample Test', () => {
     });
 });
 
-
-
 describe('RESTful controller unit tests for Toys operations:', () => {
     let controller;
     let mockService;
     let mockHttpResponse;
+    let mockApp;
 
     beforeEach(() => {
         mockService = jasmine.createSpyObj('mockService', ['getAllToys', 'getTeam']);
-        controller = new ToysRestController({});
+        mockApp = jasmine.createSpyObj('mockApp', ['use']);
+        controller = new ToysRestController(mockApp);
         controller.ToysService = mockService;
         mockHttpResponse = jasmine.createSpyObj('mockHttpResponse', ['status', 'json']);
         mockHttpResponse.status.and.returnValue(mockHttpResponse);
