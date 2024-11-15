@@ -1,15 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const ToysRestController = require('./src/service/toys-rest-controller');
 
 const app = express();
-const PORT = 3033;
+const PORT = process.env.PORT || 3033;
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send('Toys Service is running');
-});
+const toysController = new ToysRestController(app);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Toys service listening on port ${PORT}`);
 });
