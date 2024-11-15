@@ -9,36 +9,25 @@ class ToysService {
             return toys.map(({ id, currency, ...toy }) => toy);
         }
 
-        const taxRates = {
+        const conversionRates = {
             'US-NC': 0.08,
             'IE': 0.23,
             'IN': 0.18
         };
-        const currencies = {
-            'US-NC': 'USD',
-            'IE': 'EUR',
-            'IN': 'INR'
-        };
 
-        const taxRate = taxRates[location];
-        const currency = currencies[location];
-
-        if (!taxRate || !currency) {
-            throw new Error('Invalid location');
-        }
+        const conversionRate = conversionRates[location];
 
         return toys.map(toy => {
-            const priceWithTax = (toy.price * (1 + taxRate)).toFixed(2);
-            console.log("Price after tax", priceWithTax);
-            const { id, currency, ...rest } = toy;
-            return { ...rest, price: priceWithTax };
+            const priceWithConversion = (toy.price * (1 + conversionRate)).toFixed(2);
+            const { id, ...rest } = toy;
+            return { ...rest, price: priceWithConversion };
         });
     }
 
     getTeam() {
         return {
-            team: "toymasters",
-            membersNames: ["Cían", "Irene"]
+            team: "ToyMasters",
+            membersNames: ["Irene", "Cían"]
         };
     }
 }
